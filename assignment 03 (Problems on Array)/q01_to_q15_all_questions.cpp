@@ -168,11 +168,11 @@ int main()
     cout << "\n get_element(10) = " << d.get_element(10);
 
     // 13. In question 1, define a method to count number of elements present in the array.
-    if (is_empty())
+    if (d.is_empty())
         cout << "\narray is empty";
     else
-        cout << "total elements in array is = " << d.total_element();
-        
+        cout << "\ntotal elements in array is = " << d.total_element();
+
     // 15. In question 1, define a method to find an element in the array. Return index if the element found, otherwise return -1 .
     if (d.find(4) != -1)
         cout << "\n4 is found at index " << d.find(4);
