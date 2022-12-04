@@ -1,21 +1,4 @@
 //                          Assignment-3: Dynamic Arrays
-// 1.  Define a class DynArray to implement dynamic array data structure with member
-//     variables to store capacity of array, last index of the last filled block of the array and
-//     a pointer to hold the address of the first block of the dynamically created array.
-// 2.  In question 1, define a parameterised constructor to create an array of specified size.
-// 3.  In question 1, define a method doubleArray() to increase the size of the array by double of its size.
-// 4.  In question 1, define a method halfArray() to decrease the size of the array by half of its size.
-// 5.  In question 1, define a method which returns the current capacity of the array.
-// 6.  In question 1, add a method to check whether an array is empty or not by returning True or False.
-// 7.  In question 1, define a method to append a new element in the array
-// 8.  In question 1, define a method to insert a new element at specified index
-// 9.  In question 1, define a method to edit an element at specified index.
-// 10. In question 1, define a method to delete an element at specified index.
-// 11. In question 1, define a method to check if the array is full by returning true or false.
-// 12. In question 1, define a method to get element at specified index.
-// 13. In question 1, define a method to count number of elements present in the array.
-// 14. In question 1, define a destructor to deallocate the memory of array.
-// 15. In question 1, define a method to find an element in the array. Return index if the element found, otherwise return -1 .
 
 #include <iostream>
 using namespace std;
@@ -23,30 +6,26 @@ using namespace std;
 class DynArray
 {
 private:
-    int capacity;
-    int last_index = -1;
-    int *ptr;
+    int capacity;        // 1.  Define a class DynArray to implement dynamic array data structure with member
+    int last_index = -1; //     variables to store capacity of array, last index of the last filled block of the array and
+    int *ptr;            //     a pointer to hold the address of the first block of the dynamically created array.
 
 public:
-    DynArray(int Array_size);
-    void doubleArray();
-    void halfArray();
-    int get_capacity() { return capacity; }
-    bool is_empty() { return last_index == -1; }
-    void append(int);
-    void insert(int, int);
-    void edit(int, int);
-    void delete_elm(int);
-    bool is_full() { return last_index + 1 == capacity; }
-    int get_element(int);
-    int total_element() { return last_index + 1; }
-    int find(int);
-
+    DynArray(int Array_size);                             // 2.  In question 1, define a parameterised constructor to create an array of specified size.
+    void doubleArray();                                   // 3.  In question 1, define a method doubleArray() to increase the size of the array by double of its size.
+    void halfArray();                                     // 4.  In question 1, define a method halfArray() to decrease the size of the array by half of its size.
+    int get_capacity() { return capacity; }               // 5.  In question 1, define a method which returns the current capacity of the array.
+    bool is_empty() { return last_index == -1; }          // 6.  In question 1, add a method to check whether an array is empty or not by returning True or False.
+    void append(int);                                     // 7.  In question 1, define a method to append a new element in the array
+    void insert(int, int);                                // 8.  In question 1, define a method to insert a new element at specified index
+    void edit(int, int);                                  // 9.  In question 1, define a method to edit an element at specified index.
+    void delete_elm(int);                                 // 10. In question 1, define a method to delete an element at specified index.
+    bool is_full() { return last_index + 1 == capacity; } // 11. In question 1, define a method to check if the array is full by returning true or false.
+    int get_element(int);                                 // 12. In question 1, define a method to get element at specified index.
+    int total_element() { return last_index + 1; }        // 13. In question 1, define a method to count number of elements present in the array.
+    ~DynArray();                                          // 14. In question 1, define a destructor to deallocate the memory of array.
+    int find(int);                                        // 15. In question 1, define a method to find an element in the array. Return index if the element found, otherwise return -1 .
     void show_Array();
-    ~DynArray()
-    {
-        delete[] ptr;
-    }
 };
 DynArray::DynArray(int Array_size)
 {
@@ -118,6 +97,8 @@ void DynArray::delete_elm(int index)
         ptr[i] = ptr[i + 1];
     }
     last_index--;
+    if (last_index + 1 == capacity / 2 && capacity > 1)
+        halfArray();
 }
 int DynArray::get_element(int index)
 {
@@ -135,34 +116,69 @@ int DynArray::find(int element)
             return i;
     return -1;
 }
+DynArray::~DynArray()
+{
+    delete[] ptr;
+}
 int main()
 {
+    // 2.  In question 1, define a parameterised constructor to create an array of specified size.
     DynArray d(5);
     d.append(1);
     d.append(3);
     d.append(2);
     d.append(4);
     d.append(5);
+    d.show_Array();
+
+    // 3.  In question 1, define a method doubleArray() to increase the size of the array by double of its size.
     d.append(7);
     d.append(7);
     d.show_Array();
 
-    d.insert(-3, 5);
-    d.show_Array();
-
-    d.edit(10, 4);
-    d.show_Array();
-
+    // 4.  In question 1, define a method halfArray() to decrease the size of the array by half of its size.
+    d.delete_elm(1);
     d.delete_elm(1);
     d.show_Array();
 
+    // 5.  In question 1, define a method which returns the current capacity of the array.
+    // 6.  In question 1, add a method to check whether an array is empty or not by returning True or False.
+    // 7.  In question 1, define a method to append a new element in the array
+    // 8.  In question 1, define a method to insert a new element at specified index
+    d.insert(-3, 5);
+    d.show_Array();
+
+    // 9.  In question 1, define a method to edit an element at specified index.
+    d.edit(10, 4);
+    d.edit(1, 999);
+    d.show_Array();
+
+    // 10. In question 1, define a method to delete an element at specified index.
+    d.delete_elm(1);
+    d.show_Array();
+
+    // 11. In question 1, define a method to check if the array is full by returning true or false.
+    if (d.is_full())
+        cout << "\narray is full";
+    else
+        cout << "\narray is not full";
+
+    // 12. In question 1, define a method to get element at specified index.
     cout << "\n get_element(0) = " << d.get_element(0);
     cout << "\n get_element(10) = " << d.get_element(10);
 
+    // 13. In question 1, define a method to count number of elements present in the array.
+    if (is_empty())
+        cout << "\narray is empty";
+    else
+        cout << "total elements in array is = " << d.total_element();
+        
+    // 15. In question 1, define a method to find an element in the array. Return index if the element found, otherwise return -1 .
     if (d.find(4) != -1)
         cout << "\n4 is found at index " << d.find(4);
     else
         cout << "\n4 is not found in the array";
 
+    // 14. In question 1, define a destructor to deallocate the memory of array.
     return 0;
 }
