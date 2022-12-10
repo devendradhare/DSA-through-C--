@@ -28,16 +28,15 @@ public:
     // ~node() { delete next; }
 };
 
-class SSL
+class SLL
 {
 private:
     node *start;     // 1.  Define a class SLL to implement singly linked list data structure with member
     node *last_node; //     variable start pointer of type node.
-    int total = 0;
     int last_index = -1;
 
 public:
-    SSL() { start = NULL; }        // 2.  In question 1, define a constructor to initialise start pointer with NULL.
+    SLL() { start = NULL; }        // 2.  In question 1, define a constructor to initialise start pointer with NULL.
     void insert_at_beginning(int); // 3.  In question 1, define a method to insert a data into the list at the beginning.
     void insert_at_end(int);       // 4.  In question 1, define a method to insert a data into the list at the end
     int search(int);               // 5.  In question 1, define a method to search a node with the give item.
@@ -45,11 +44,11 @@ public:
     void delete_first();           // 7.  In question 1, define a method to delete first node from the list.
     void delete_last();            // 8.  In question 1, define a rnethod to delete last node Of the list.
     void delete_index(int);        // 9.  In question 1, define a method to delete a specific node.
-    // 10. In question 1, define a destructor to deallocates memory for all the nodes in the linked list.
-    ~SSL() {}
+    ~SLL();                        // 10. In question 1, define a destructor to deallocates memory for all the nodes in the linked list.
+
     void show_list();
 };
-void SSL::insert_at_beginning(int data)
+void SLL::insert_at_beginning(int data)
 {
     node *temp;
     temp = new node;
@@ -57,11 +56,10 @@ void SSL::insert_at_beginning(int data)
     temp->next = start;
     start = temp;
 
-    total++;
     last_index++;
 }
 
-void SSL::insert_at_end(int data)
+void SLL::insert_at_end(int data)
 {
     node *n = start;
     node *temp;
@@ -76,7 +74,7 @@ void SSL::insert_at_end(int data)
     last_index++;
 }
 
-void SSL::show_list()
+void SLL::show_list()
 {
     node *n = start;
     cout << "\n";
@@ -87,7 +85,7 @@ void SSL::show_list()
     }
 }
 
-int SSL::search(int item)
+int SLL::search(int item)
 {
     node *n = start;
     for (int i = 0; i <= last_index; i++)
@@ -99,7 +97,7 @@ int SSL::search(int item)
     return -1;
 }
 
-void SSL::insert(int index, int data)
+void SLL::insert(int index, int data)
 {
     if (index < 0 || index > last_index)
     {
@@ -125,7 +123,7 @@ void SSL::insert(int index, int data)
     last_index++;
 }
 
-void SSL::delete_first()
+void SLL::delete_first()
 {
     node *temp;
     temp = start;
@@ -134,18 +132,30 @@ void SSL::delete_first()
     last_index--;
 }
 
-void SSL::delete_last()
+void SLL::delete_last()
 {
+    if (start = NULL)
+    {
+        cout << "< delete_last : Array is Empty >";
+        return;
+    }
+    if (start->next->next == NULL)
+    {
+        delete start;
+        start = NULL;
+    }
+
     node *n = start;
-    for (int i = 0; i < last_index; i++)
+    while (n->next->next == NULL)
     {
         n = n->next;
     }
-    delete n;
+    delete n->next;
+    n->next = NULL;
     last_index--;
 }
 
-void SSL::delete_index(int index)
+void SLL::delete_index(int index)
 {
     if (index < 0 || index > last_index)
     {
@@ -164,9 +174,18 @@ void SSL::delete_index(int index)
     last_index--;
 }
 
+SLL::~SLL()
+{
+    for (int i = 0; i <= last_index; i++)
+    {
+        cout << " " << i;
+        delete_first();
+    }
+}
+
 int main()
 {
-    SSL list;
+    SLL list;
     list.insert_at_beginning(5);
     list.insert_at_beginning(4);
     list.insert_at_beginning(2);
