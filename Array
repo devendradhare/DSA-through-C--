@@ -1,3 +1,5 @@
+//                 Assignment-I : Array Data Structure
+
 class Array
 {                                                     // 1.  Define a class Array to implement array data structure with member variables to
 private:                                              //     store capacity of array, last index of the last filled block of the array and a pointer to
@@ -26,7 +28,7 @@ Array::Array(int size)
 void Array::Append(int element)
 {
     if (size == last_index + 1)
-        std::cout << "\n< Append : Array is full > ";
+        std::cout << "\n< Array is full > ";
     else
     {
         ptr[++last_index] = element;
@@ -35,9 +37,9 @@ void Array::Append(int element)
 
 void Array::Delete(int index)
 {
-    if (index < 0 || index >= size)
+    if (index < 0 || index > last_index)
     {
-        std::cout << "\n< Delete : Invalid Index > Array size = " << size << "Your Index = " << index;
+        std::cout << "\n< Delete : Index out of range >";
         return;
     }
     int temp;
@@ -60,8 +62,8 @@ int Array::find(int element)
 
 void Array::Edit(int index, int element)
 {
-    if (index < 0 || index >= size)
-        std::cout << "\n< Edit : Invalid Index > Array size = " << size << "your Index = " << index;
+    if (index < 0 || index > last_index)
+        std::cout << "\n< Edit : Index is out of rang >";
     else
         ptr[index] = element;
 }
@@ -71,7 +73,7 @@ void Array::Insert(int index, int element)
     if (size == last_index + 1)
         std::cout << "\n< Insert : Array is full > ";
     else if (index < 0 || index > last_index)
-        std::cout << "< Insert : Invalid Index >";
+        std::cout << "\n< Insert : Index is out of rang > ";
     else
     {
         int temp;

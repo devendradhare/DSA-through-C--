@@ -4,21 +4,21 @@
 using namespace std;
 
 class Array
-{                                                              // 1.  Define a class Array to implement array data structure with member variables to
-private:                                                       //     store capacity of array, last index of the last filled block of the array and a pointer to
-    int *ptr = NULL, size = 0, last_index = -1;                //     hold the address of the first block of the dynamically created array.
-public:                                                        //
-    Array(int size);                                           // 2.  In question 1, define a parameterised constructor to create an array of specified size.
-    bool Is_Empty() { return last_index == -1; }               // 3.  In question 1, add a method to check whether an array is empty or not by returning True or False.
-    void Append(int element);                                  // 4.  In question 1, define a method to append a new element in the array
-    void Insert(unsigned int index, int element);              // 5.  In question 1, define a method to insert a new element at specified index
-    void Edit(unsigned int index, int element);                // 6.  In question 1, define a method to edit an element at specified index.
-    void Delete(unsigned int index);                           // 7.  In question 1, define a method to delete an element at specified index.
-    bool Is_Full() { return last_index == size - 1; }          // 8.  In question 1, define a method to check if the array is full by returning true or false.
-    int get_element(unsigned int index) { return ptr[index]; } // 9.  In question 1, define a method to get element at specified index.
-    int no_of_elements() { return last_index + 1; }            // 10. In question 1, define a method to count number of elements present in the array.
-    ~Array() { delete ptr; }                                   // 11. In question 1, define a destructor to deallocate the memory of array.
-    int find(int element);                                     // 12. In question 1, define a method to find an element in the array. Return index if the element found, otherwise return -1.
+{                                                     // 1.  Define a class Array to implement array data structure with member variables to
+private:                                              //     store capacity of array, last index of the last filled block of the array and a pointer to
+    int *ptr = NULL, size = 0, last_index = -1;       //     hold the address of the first block of the dynamically created array.
+public:                                               //
+    Array(int size);                                  // 2.  In question 1, define a parameterised constructor to create an array of specified size.
+    bool Is_Empty() { return last_index == -1; }      // 3.  In question 1, add a method to check whether an array is empty or not by returning True or False.
+    void Append(int element);                         // 4.  In question 1, define a method to append a new element in the array
+    void Insert(int index, int element);              // 5.  In question 1, define a method to insert a new element at specified index
+    void Edit(int index, int element);                // 6.  In question 1, define a method to edit an element at specified index.
+    void Delete(int index);                           // 7.  In question 1, define a method to delete an element at specified index.
+    bool Is_Full() { return last_index == size - 1; } // 8.  In question 1, define a method to check if the array is full by returning true or false.
+    int get_element(int index) { return ptr[index]; } // 9.  In question 1, define a method to get element at specified index.
+    int no_of_elements() { return last_index + 1; }   // 10. In question 1, define a method to count number of elements present in the array.
+    ~Array() { delete ptr; }                          // 11. In question 1, define a destructor to deallocate the memory of array.
+    int find(int element);                            // 12. In question 1, define a method to find an element in the array. Return index if the element found, otherwise return -1.
     void Display();
 };
 
@@ -38,11 +38,11 @@ void Array::Append(int element)
     }
 }
 
-void Array::Delete(unsigned int index)
+void Array::Delete(int index)
 {
-    if (index >= size)
+    if (index < 0 || index > last_index)
     {
-        cout << "\n< out of Index > Array size = " << size << "Your Index = " << index;
+        cout << "\n< Delete : Index out of range >";
         return;
     }
     int temp;
@@ -63,20 +63,20 @@ int Array::find(int element)
     return -1;
 }
 
-void Array::Edit(unsigned int index, int element)
+void Array::Edit(int index, int element)
 {
-    if (index >= size)
-        cout << "\n< out of Index > Array size = " << size << "your Index = " << index;
+    if (index < 0 || index > last_index)
+        cout << "\n< Edit : Index is out of rang >";
     else
         ptr[index] = element;
 }
 
-void Array::Insert(unsigned int index, int element)
+void Array::Insert(int index, int element)
 {
     if (size == last_index + 1)
-        cout << "\n< Array is full > ";
-    else if (index > last_index)
-        ptr[++last_index] = element;
+        cout << "\n< Insert : Array is full > ";
+    else if (index < 0 || index > last_index)
+        cout << "\n< Insert : Index is out of rang > ";
     else
     {
         int temp;
@@ -102,12 +102,12 @@ int main()
     num.Append(1);
     num.Display();
 
-    num.Insert(1, 3);
+    num.Insert(0, 3);
     num.Display();
 
     num.Insert(1, 2);
-    num.Insert(5, 5);
-    num.Insert(3, 4);
+    num.Insert(1, 5);
+    num.Insert(1, 4);
     num.Display();
 
     num.Insert(3, 4);
@@ -121,6 +121,7 @@ int main()
 
     num.Insert(2, 7);
     num.Display();
+    
     num.Is_Full() ? cout << "\n num Array is Full" : cout << "\n num Array is not Full";
 
     cout << "\n get element of index 3 = " << num.get_element(3);
