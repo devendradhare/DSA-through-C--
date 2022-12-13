@@ -1,4 +1,5 @@
 #include <iostream>
+#include "../Array"
 using namespace std;
 
 class Array_Mode : public Array
