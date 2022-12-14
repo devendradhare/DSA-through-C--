@@ -30,12 +30,13 @@ public:
     void insert_beginning(int);          // 3.  define a method to insert a data into the list at the beginning.
     void insert_end(int);                // 4.  define a method to insert a data into the list at the end
     node *search_node(int);              // int search(int);            // 5.  define a method to search a node with the give item.
-    void search_index(int);              //
+    int search_index(int);              //
     void insert_at_index(int, int);      // 6.  define a method to insert a data into the list after the specified node of the list.
     void insert_after_node(node *, int); //
     void delete_first();                 // 7.  define a method to delete first node from the list.
     void delete_last();                  // 8.  define a method to delete last node of the list.
-    void delete_(int);                   // 9.  define a method to delete a specific node.
+    void delete_index(int);              // 9.  define a method to delete a specific node.
+    void delete_node(node *);            //
     ~DLL();                              // 10. define a destructor to deallocates memory for all the nodes in the linked list.
     void show_list();
 };
@@ -272,10 +273,10 @@ int main()
     list.insert_end(5);
     list.show_list();
 
-    cout << "\n4 is avilable at index = " << list.search(4);
-    cout << "\n5 is avilable at node  = " << list.search(5);
+    cout << "\n4 is avilable at index = " << list.search_index(4);
+    cout << "\n5 is avilable at node  = " << list.search_index(5);
 
-    list.insert(3, 3);
+    list.insert_at_index(3, 3);
     list.show_list();
 
     list.delete_first();
@@ -293,7 +294,10 @@ int main()
     list.delete_last();
     list.show_list();
 
-    list.delete_(1);
+    list.delete_index(1);
+    list.show_list();
+
+    list.delete_node(list.search_node(1));
     list.show_list();
 
     return 0;
