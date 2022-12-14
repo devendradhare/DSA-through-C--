@@ -195,7 +195,7 @@ void DLL::delete_last()
     last_index--;
 }
 
-void DLL::delete_(int index)
+void DLL::delete_index(int index)
 {
     if (index < 0 || index > last_index)
     {
@@ -219,6 +219,40 @@ void DLL::delete_(int index)
     delete n->next->prev;
     n->next->prev = n;
     last_index--;
+}
+
+void DLL::delete_node(node *n)
+{
+    if (start == NULL)
+    {
+        cout << "< delete_node : Array is empty >";
+        return;
+    }
+    node *t = start;
+    while (t != NULL)
+    {
+        if (t == n)
+        {
+            if (t->prev == NULL)
+            {
+                delete_first();
+                return;
+            }
+            else if (t->next == NULL)
+            {
+                delete_last();
+                return;
+            }
+            t->prev->next = t->next;
+            t->next->prev = t->prev;
+            delete t;
+
+            last_index--;
+            return;
+        }
+        t = t->next;
+    }
+    cout << "< delete_node : node not found >";
 }
 
 DLL::~DLL()
