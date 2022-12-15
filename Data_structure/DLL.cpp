@@ -1,11 +1,6 @@
 //                    DSA through C++
 //          Assignment-5: Doubly Linked List
 
-#include <iostream>
-#include <stdio.h>
-
-using namespace std;
-
 class node
 {
 public:
@@ -43,10 +38,10 @@ public:
 void DLL::show_list()
 {
     node *temp = start;
-    cout << "\n";
+    std::cout << "\n";
     while (temp != NULL)
     {
-        cout << temp->data << ", ";
+        std::cout << temp->data << ", ";
         temp = temp->next;
     }
 }
@@ -105,7 +100,7 @@ void DLL::insert_at_index(int index, int data)
 {
     if (index < 0 || index > last_index + 1)
     {
-        cout << " < insert : Invalid index >";
+        std::cout << " < insert : Invalid index >";
         return;
     }
     if (index == 0)
@@ -134,7 +129,7 @@ void DLL::insert_after_node(node *n, int data)
 {
     if (start == NULL)
     {
-        cout << "< insert_after_node : Array is empty >";
+        std::cout << "< insert_after_node : Array is empty >";
         return;
     }
     node *t = start;
@@ -163,7 +158,7 @@ void DLL::delete_first()
 {
     if (start == NULL)
     {
-        cout << " < delete_first : Array is empty >";
+        std::cout << " < delete_first : Array is empty >";
         return;
     }
     node *n = start;
@@ -179,7 +174,7 @@ void DLL::delete_last()
 {
     if (start == NULL)
     {
-        cout << " < delete_last : Array is empty >";
+        std::cout << " < delete_last : Array is empty >";
         return;
     }
     if (start->next == NULL)
@@ -200,7 +195,7 @@ void DLL::delete_index(int index)
 {
     if (index < 0 || index > last_index)
     {
-        cout << " < delete_ : Index out of range >";
+        std::cout << " < delete_ : Index out of range >";
         return;
     }
     if (index == 0)
@@ -226,7 +221,7 @@ void DLL::delete_node(node *n)
 {
     if (start == NULL)
     {
-        cout << "< delete_node : Array is empty >";
+        std::cout << "< delete_node : Array is empty >";
         return;
     }
     node *t = start;
@@ -253,52 +248,11 @@ void DLL::delete_node(node *n)
         }
         t = t->next;
     }
-    cout << "< delete_node : node not found >";
+    std::cout << "< delete_node : node not found >";
 }
 
 DLL::~DLL()
 {
     while (start != NULL)
         delete_first();
-}
-
-int main()
-{
-    DLL list;
-    list.insert_beginning(1);
-    list.insert_beginning(2);
-    list.show_list();
-
-    list.insert_end(4);
-    list.insert_end(5);
-    list.show_list();
-
-    cout << "\n4 is avilable at index = " << list.search_index(4);
-    cout << "\n5 is avilable at node  = " << list.search_index(5);
-
-    list.insert_at_index(3, 3);
-    list.show_list();
-
-    list.delete_first();
-    list.show_list();
-    // list.delete_first();
-    // list.show_list();
-    // list.delete_first();
-    // list.show_list();
-    // list.delete_first();
-    // list.show_list();
-    // list.delete_first();
-    // list.show_list();
-    // list.delete_first();
-
-    list.delete_last();
-    list.show_list();
-
-    list.delete_index(1);
-    list.show_list();
-
-    list.delete_node(list.search_node(1));
-    list.show_list();
-
-    return 0;
 }

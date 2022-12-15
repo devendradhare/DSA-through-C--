@@ -32,6 +32,9 @@ public:
     void delete_node(node *);            //
     ~SLL();                              // 10. In question 1, define a destructor to deallocates memory for all the nodes in the linked list.
     void show_list();
+
+    // some required functions for the assignment 07 ->
+    node *get_start() { return start; }
 };
 void SLL::insert_at_first(int data)
 {

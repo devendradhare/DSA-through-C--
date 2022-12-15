@@ -2,7 +2,7 @@
 //            Assignment-4: Singly Linked List
 
 #include <iostream>
-#include "../SLL"
+#include "Data_structure/SLL.cpp"
 using namespace std;
 
 int main()
