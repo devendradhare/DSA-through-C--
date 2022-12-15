@@ -15,26 +15,27 @@ public:
 class SLL
 {
 private:
-    node *start;     // 1.  Define a class SLL to implement singly linked list data structure with member
-    node *last_node; //     variable start pointer of type node.
-    int last_index = -1;
+    node *start;         // 1.  Define a class SLL to implement singly linked list data structure with member
+    int last_index = -1; //     variable start pointer of type node.
 
 public:
-    SLL() { start = NULL; }        // 2.  In question 1, define a constructor to initialise start pointer with NULL.
-    void insert_at_beginning(int); // 3.  In question 1, define a method to insert a data into the list at the beginning.
-    void insert_at_end(int);       // 4.  In question 1, define a method to insert a data into the list at the end
-    int search(int);               // 5.  In question 1, define a method to search a node with the give item.
-    void insert(int, int);         // 6.  In question 1, define a method to insert a data into the list after the specified node of the list.
-    void delete_first();           // 7.  In question 1, define a method to delete first node from the list.
-    void delete_last();            // 8.  In question 1, define a rnethod to delete last node Of the list.
-    void delete_index(int);        // 9.  In question 1, define a method to delete a specific node.
-    ~SLL();                        // 10. In question 1, define a destructor to deallocates memory for all the nodes in the linked list.
+    SLL() { start = NULL; }              // 2.  In question 1, define a constructor to initialise start pointer with NULL.
+    void insert_at_first(int);           // 3.  In question 1, define a method to insert a data into the list at the beginning.
+    void insert_at_last(int);            // 4.  In question 1, define a method to insert a data into the list at the end
+    int search_index(int);               // 5.  In question 1, define a method to search a node with the give item.
+    node *search_node(int);              //
+    void insert_at_index(int, int);      // 6.  In question 1, define a method to insert a data into the list after the specified node of the list.
+    void insert_after_node(node *, int); //
+    void delete_first();                 // 7.  In question 1, define a method to delete first node from the list.
+    void delete_last();                  // 8.  In question 1, define a rnethod to delete last node Of the list.
+    void delete_index(int);              // 9.  In question 1, define a method to delete a specific node.
+    void delete_node(node *);            //
+    ~SLL();                              // 10. In question 1, define a destructor to deallocates memory for all the nodes in the linked list.
     void show_list();
 };
-void SLL::insert_at_beginning(int data)
+void SLL::insert_at_first(int data)
 {
-    node *temp;
-    temp = new node;
+    node *temp = new node;
     temp->data = data;
     temp->next = start;
     start = temp;
@@ -42,76 +43,111 @@ void SLL::insert_at_beginning(int data)
     last_index++;
 }
 
-void SLL::insert_at_end(int data)
+void SLL::insert_at_last(int data)
 {
     if (start == NULL)
-        insert_at_beginning(data);
-    node *n = start;
-    node *temp;
-    for (int i = 0; i < last_index - 1; i++)
     {
-        n = n->next;
+        insert_at_first(data);
+        return;
     }
-    temp = new node;
+    node *t = start;
+    while (t->next != NULL)
+        t = t->next;
+    node *temp = new node;
     temp->data = data;
-    n->next = temp;
+    t->next = temp;
 
     last_index++;
 }
 
 void SLL::show_list()
 {
-    node *n = start;
+    node *t = start;
     std::cout << "\n";
-    for (int i = 0; i <= last_index; i++)
+    while (t != NULL)
     {
-        std::cout << " " << n->data << ",";
-        n = n->next;
+        std::cout << " " << t->data << ",";
+        t = t->next;
     }
 }
 
-int SLL::search(int item)
+int SLL::search_index(int data)
 {
-    node *n = start;
-    for (int i = 0; i <= last_index; i++)
+    node *t = start;
+    int i = 0;
+    while (t != NULL)
     {
-        if (n->data == item)
+        if (t->data == data)
             return i;
-        n = n->next;
+        t = t->next;
+        i++;
     }
     return -1;
 }
 
-void SLL::insert(int index, int data)
+node *SLL::search_node(int data)
+{
+    node *t = start;
+    while (t != NULL)
+    {
+        if (t->data == data)
+            return t;
+        t = t->next;
+    }
+    return NULL;
+}
+
+void SLL::insert_at_index(int index, int data)
 {
     if (index < 0 || index > last_index)
     {
-        std::cout << "<insert : Invalid index>";
+        std::cout << " <insert_at_index: Invalid index> ";
         return;
     }
     if (index == 0)
     {
-        insert_at_beginning(data);
+        insert_at_first(data);
         return;
     }
-    node *temp = new node;
-    temp->data = data;
 
     node *n = start;
-    for (int i = 0; i < index; i++)
-    {
+    for (int i = 0; i < index - 1; i++)
         n = n->next;
-    }
-    node *t = n->next;
+
+    node *temp = new node;
+    temp->data = data;
+    temp->next = n->next;
     n->next = temp;
-    temp->next = t;
     last_index++;
+}
+
+void SLL::insert_after_node(node *nod, int data)
+{
+    node *t = start;
+    while (t != NULL)
+    {
+        if (t == nod)
+        {
+            node *nw = new node;
+            nw->data = data;
+            nw->next = t->next;
+            t->next = nw;
+            last_index++;
+            return;
+        }
+        t = t->next;
+    }
+    std::cout << " <insert_after_node: node not found> ";
 }
 
 void SLL::delete_first()
 {
-    node *temp;
-    temp = start;
+    if (start == NULL)
+    {
+        std::cout << " <delete_first: list is empty> ";
+        return;
+    }
+    node *temp = start;
     start = start->next;
     delete temp;
     last_index--;
@@ -119,7 +155,7 @@ void SLL::delete_first()
 
 void SLL::delete_last()
 {
-    if (start = NULL)
+    if (start == NULL)
     {
         std::cout << "< delete_last : Array is Empty >";
         return;
@@ -128,16 +164,14 @@ void SLL::delete_last()
     {
         delete start;
         start = NULL;
+        last_index--;
         return;
     }
-
-    node *n = start;
-    while (n->next->next != NULL)
-    {
-        n = n->next;
-    }
-    delete n->next;
-    n->next = NULL;
+    node *t = start;
+    while (t->next->next != NULL)
+        t = t->next;
+    delete t->next;
+    t->next = NULL;
     last_index--;
 }
 
@@ -145,11 +179,14 @@ void SLL::delete_index(int index)
 {
     if (index < 0 || index > last_index)
     {
-        std::cout << "<delete : Invalid index>";
+        std::cout << " <delete : Invalid index> ";
         return;
     }
     if (index == 0)
+    {
         delete_first();
+        return;
+    }
     node *n = start;
     for (int i = 0; i < index - 1; i++)
     {
@@ -159,12 +196,30 @@ void SLL::delete_index(int index)
     n->next = n->next->next;
     last_index--;
 }
+void SLL::delete_node(node *nod)
+{
+    if (start == nod)
+    {
+        delete_first();
+        return;
+    }
+    node *t = start;
+    while (t != NULL)
+    {
+        if (t->next == nod)
+        {
+            t->next = nod->next;
+            delete nod;
+            last_index--;
+            return;
+        }
+        t = t->next;
+    }
+    std::cout << " <delete_node: node not found> ";
+}
 
 SLL::~SLL()
 {
-    for (int i = 0; i <= last_index; i++)
-    {
-        std::cout << " " << i;
+    while (start != NULL)
         delete_first();
-    }
 }
