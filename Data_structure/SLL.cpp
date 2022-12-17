@@ -17,6 +17,8 @@ class SLL
 private:
     node *start;         // 1.  Define a class SLL to implement singly linked list data structure with member
     int last_index = -1; //     variable start pointer of type node.
+protected:
+    void set_start(node *nod) { start = nod; } // some required functions for the assignment 07 ->
 
 public:
     SLL() { start = NULL; }              // 2.  In question 1, define a constructor to initialise start pointer with NULL.
