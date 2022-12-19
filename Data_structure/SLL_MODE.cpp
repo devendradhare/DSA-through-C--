@@ -17,15 +17,29 @@ public:
     void sort();         // 6.  method to sort a linked list.
     void merge(SLL &);   // 7.  method to merge two sorted linked list
 };
-class polynomial
-{
-private:
-    SLL p; // 8.  Polynomial class to implement polynomial using linked list
+// class polynomial
+// {
+// private:
+//     struct node
+//     {
+//         int coeff;
+//         int deg;
+//         node *next;
+//     }; // 8.  Polynomial class to implement polynomial using linked list
+//     node *start;
 
-public:
-    // 9.  method to add two polynomials.62
-    
-};
+// public:
+//     // 9.  method to add two polynomials.62
+//     void insert(int c, int d);
+// };
+// void polynomial::insert(int c, int d)
+// {
+//     node *n = new node;
+//     n->coeff = c;
+//     n->deg = d;
+//     if(start == NULL)
+//     n->
+// }
 // 10. You are given two non-empty linked lists representing two non-negative integers.
 //     The digits are stored in reverse order, and each of their nodes contains a single
 //     digit. Add the two numbers and return the sum as a linked list. You may assume the
@@ -47,27 +61,15 @@ void SLL_MODE::merge(SLL &l2)
             l2.delete_first();
         }
     }
-    if (get_start() == NULL)
+    while (l2.get_start() != NULL)
     {
-        if (l2.get_start() != NULL)
-        {
-            while (l2.get_start() != NULL)
-            {
-                temp->insert_at_last(l2.get_start()->data);
-                l2.delete_first();
-            }
-        }
+        temp->insert_at_last(l2.get_start()->data);
+        l2.delete_first();
     }
-    else if (l2.get_start() == NULL)
+    while (get_start() != NULL)
     {
-        if (get_start() != NULL)
-        {
-            while (get_start() != NULL)
-            {
-                temp->insert_at_last(get_start()->data);
-                delete_first();
-            }
-        }
+        temp->insert_at_last(get_start()->data);
+        delete_first();
     }
     set_start(temp->get_start());
 }
@@ -104,12 +106,11 @@ int SLL_MODE::cycle_len()
 
     node *t1, *t2;
     t1 = t2 = get_start();
-    while (t1 != t2)
+    do
     {
         t1 = t1->next;
         t2 = t2->next->next;
-    }
-    int count = 1;
+    } while (t1 != t2) int count = 1;
     while (t1->next != t2)
     {
         count++;
