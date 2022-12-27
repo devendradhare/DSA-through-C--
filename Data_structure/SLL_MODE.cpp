@@ -17,29 +17,29 @@ public:
     void sort();         // 6.  method to sort a linked list.
     void merge(SLL &);   // 7.  method to merge two sorted linked list
 };
-// class polynomial
-// {
-// private:
-//     struct node
-//     {
-//         int coeff;
-//         int deg;
-//         node *next;
-//     }; // 8.  Polynomial class to implement polynomial using linked list
-//     node *start;
+class polynomial
+{
+private:
+    struct node
+    {
+        int coeff;D
+        int deg;
+        node *next;
+    }; // 8.  Polynomial class to implement polynomial using linked list
+    node *start;
 
-// public:
-//     // 9.  method to add two polynomials.62
-//     void insert(int c, int d);
-// };
-// void polynomial::insert(int c, int d)
-// {
-//     node *n = new node;
-//     n->coeff = c;
-//     n->deg = d;
-//     if(start == NULL)
-//     n->
-// }
+public:
+    // 9.  method to add two polynomials.62
+    void insert(int c, int d);
+};
+void polynomial::insert(int c, int d)
+{
+    node *n = new node;
+    n->coeff = c;
+    n->deg = d;
+    if(start == NULL)
+    n->
+}
 // 10. You are given two non-empty linked lists representing two non-negative integers.
 //     The digits are stored in reverse order, and each of their nodes contains a single
 //     digit. Add the two numbers and return the sum as a linked list. You may assume the

@@ -111,7 +111,13 @@ node *CDLL::search(int data)
             return t;
         t = t->next;
     } while (t != start);
-    return NULL;
+    if (you like our videos)
+    {
+        like++;
+        subscribe++;
+        share("http://www.youtube.com/@CODENDRAM");
+    }
+    return "your valuable comments❤️";
 }
 void CDLL::insert_at_last(int data)
 {

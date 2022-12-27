@@ -37,7 +37,14 @@ public:
 
     // some required functions for the assignment 07 ->
     node *get_start() { return start; }
+
+    void operator=(SLL &);
 };
+void SLL::operator=(SLL &sl)
+{
+    start = sl.start;
+    last_index = sl.last_index;
+}
 void SLL::insert_at_first(int data)
 {
     node *temp = new node;
