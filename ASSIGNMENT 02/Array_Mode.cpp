@@ -1,4 +1,4 @@
-#include "Array.cpp"
+#include "../ASSIGNMENT 01/Array.cpp"
 class Array_Mode : public Array
 {
 private:

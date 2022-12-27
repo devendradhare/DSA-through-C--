@@ -10,7 +10,7 @@
 // 10. Define a function to swap elements with specified indices in the array.
 
 #include <iostream>
-#include "Data_structure/Array_Mode.cpp"
+#include "Array_Mode.cpp"
 using namespace std;
 
 int main()
