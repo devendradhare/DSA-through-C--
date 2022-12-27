@@ -1,7 +1,7 @@
 //                          Assignment-3: Dynamic Arrays
 
 #include <iostream>
-#include "Data_structure/DynArray.cpp"
+#include "DynArray.cpp"
 using namespace std;
 
 int main()
