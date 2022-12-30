@@ -1,23 +1,34 @@
 //                         DSA through C++
 //                 Assignment-9: Stack using arrays
-#include "Array.cpp"
+#include "..\ASSIGNMENT 01 Array\Array.cpp"
 
 class Stack : private Array
 { // 1.  class Stack with capacity, top and ptr pointer as member variables. Implement stack using array.
 private:
 public:
-    Stack(int);       // 2.  parameterzied constructor to initialise member variables.
-    void push(int);   // 3.  method to push a new element on to the Stack.
-    int peek();       // 4.  method to peek top element of the stack.
-    int pop();        // 5.  method to pop the top element of the stack.
-    ~Stack() {}       // 6.  destructor to deallocates the memory.
-    bool overflow();  // 7.  method to check stack overflow
-    bool underflow(); // 8.  method to check stack underflow.
-    void reverse();   // 9.  method to reverse a stack.
-                      // 10. solution to keep track of minimum value element in the stack.
+    Stack(int);          // 2.  parameterzied constructor to initialise member variables.
+    void push(int);      // 3.  method to push a new element on to the Stack.
+    int peek();          // 4.  method to peek top element of the stack.
+    int pop();           // 5.  method to pop the top element of the stack.
+    ~Stack() {}          // 6.  destructor to deallocates the memory.
+    bool overflow();     // 7.  method to check stack overflow
+    bool underflow();    // 8.  method to check stack underflow.
+    void reverse();      // 9.  method to reverse a stack.
+    int minimum_value(); // 10. solution to keep track of minimum value element in the stack.
 
     void show_stack();
 };
+
+int Stack::minimum_value()
+{
+    int m = get_element(0);
+    for (int i = no_of_elements() - 1; i > 0; i--)
+    {
+        if (get_element(i) < m)
+            m = get_element(i);
+    }
+    return m;
+}
 
 void Stack::reverse()
 {

@@ -2,7 +2,7 @@
 //                 Assignment-9: Stack using arrays
 #include <iostream>
 using namespace std;
-#include "Data_structure/stack.cpp"
+#include "stack.cpp"
 
 int main()
 {
@@ -36,5 +36,7 @@ int main()
     s.reverse();
     s.show_stack();
 
-    return 0
+    cout << "\n minimum value in the stack is = " << s.minimum_value();
+
+    return 0;
 }
