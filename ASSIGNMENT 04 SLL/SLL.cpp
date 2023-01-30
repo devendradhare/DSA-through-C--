@@ -42,8 +42,12 @@ public:
 };
 void SLL::operator=(SLL &sl)
 {
-    start = sl.start;
-    last_index = sl.last_index;
+    node *t = sl.get_start();
+    while (t->data)
+    {
+        insert_at_last(t->data);
+        t = t->next;
+    }
 }
 void SLL::insert_at_first(int data)
 {
