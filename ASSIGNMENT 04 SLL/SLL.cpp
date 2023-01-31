@@ -43,7 +43,11 @@ public:
 void SLL::operator=(SLL &sl)
 {
     node *t = sl.get_start();
-    while (t->data)
+    while (start)
+    {
+        delete_last();
+    }
+    while (t)
     {
         insert_at_last(t->data);
         t = t->next;
