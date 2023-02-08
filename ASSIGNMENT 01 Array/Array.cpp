@@ -1,10 +1,16 @@
 //                 Assignment-I : Array Data Structure
 
 class Array
-{                                                     // 1.  Define a class Array to implement array data structure with member variables to
-private:                                              //     store capacity of array, last index of the last filled block of the array and a pointer to
-    int *ptr = NULL, size = 0, last_index = -1;       //     hold the address of the first block of the dynamically created array.
-public:                                               //
+{                                               // 1.  Define a class Array to implement array data structure with member variables to
+private:                                        //     store capacity of array, last index of the last filled block of the array and a pointer to
+    int *ptr = NULL, size = 0, last_index = -1; //     hold the address of the first block of the dynamically created array.
+protected:
+    int *get_ptr() // created for assignment 11 queue
+    {
+        return ptr;
+    }
+
+public:
     Array(int size);                                  // 2.  In question 1, define a parameterised constructor to create an array of specified size.
     bool Is_Empty() { return last_index == -1; }      // 3.  In question 1, add a method to check whether an array is empty or not by returning True or False.
     void Append(int element);                         // 4.  In question 1, define a method to append a new element in the array
